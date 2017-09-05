@@ -88,3 +88,9 @@ and where every attribute of the class is a field of the table or collection.
 Models are defined in the app/models.py
 
 * Every model inherits from  `django.db.models.Model`
+
+## Django - URL Mapping
+
+After creating view, we want to access that view via a URL.
+Django has his own way for URL mapping and its done by editing the project
+`url.py`
