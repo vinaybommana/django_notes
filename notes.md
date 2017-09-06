@@ -89,6 +89,43 @@ Models are defined in the app/models.py
 
 * Every model inherits from  `django.db.models.Model`
 
+object.save()
+
+* hard coding the values to the data base
+
+```python
+todo1 = Todo(
+  website = "www.polo.com",
+  mail = "sorez@polo.com",
+  name = "sorez",
+  phone = "002376970"
+)
+todo1.save()
+# if we want to delete an entry
+todo_delete = Todo.objects.get(name = "sorez")
+todo_delete.delete()
+```python
+
+* Filtering data
+`queries = Todo.objects.filter(name="paul")`
+
+* Ordering results
+`results = Todo.objects.order_by("name")` 
+
+### models.ForeignKey
+
+A many-to-one relationship. Requires two positional arguments: The class
+to which the model is related and the on_delete option.
+
+To create a recursive relationship - an object that has a many-to-one
+relationship with itself - use
+
+`models.ForeignKey('self', on_delete=models.CASCADE)`
+
+* `ForeignKey` accepts other arguments that defines the details of how the 
+  relation works.
+
+
 ## Django - URL Mapping
 
 After creating view, we want to access that view via a URL.
