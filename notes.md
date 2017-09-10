@@ -32,7 +32,7 @@ python3 manage.py startapp myapp
 
 * `views.py` - This is where your application views are.
 
-## polls/views.py
+## views.py
 
 * To call the view, we need to map it to a URL - and for this we need
   a URLconf.
@@ -165,3 +165,47 @@ It is not very smart -- it takes a list of patterns and tries to match
 the URL. Django checks patterns from top to bottom and if something is 
 matched, then Django passes the request to the associated function 
 (which is called *view*)
+
+
+### Django views
+
+A _view_ is a place where we put the "logic" of our application. It will request 
+information from the `model` we've created before and pass it to a `template`.
+* views are just python functions.
+* views connects the models and templates
+
+### Django ORM and Query Sets
+
+#### QuerySet
+
+A QuerySet is, in essence, a list of objects of a given Model
+QuerySet allow you to read the data from the database, filter it and order it.
+
+`python3 manage.py shell`
+
+The effect should be like:
+```python3
+(InteractiveConsole)
+>>>
+>>> from blog.models import Post
+>>> Post.objects.all()
+<QuerySet []>
+```
+
+#### Creating an Object
+
+```python3
+>>> Post.objects.create(author=me, title='Sample title', text='Test')
+
+>>> from django.contrib.auth.models import User
+>>> User.objects.all()
+<QuerySet [<User: ola>]>
+>>> me = User.objects.get(username='ola')
+>>> # now creating a post
+>>> Post.objects.create(author=me, title='Sample title', text='Test')
+
+>>> Post.objects.filter(title__contains='title')
+>>> post = Post.objects.get(title="Sample title")
+>>> post.publish()
+>>> exit
+```
