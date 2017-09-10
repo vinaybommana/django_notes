@@ -11,7 +11,7 @@ The import order in a Django Project is :
 
 ## Create an Application
 
-```python
+```bash
 python3 manage.py startapp myapp
 ```
 
@@ -22,7 +22,7 @@ python3 manage.py startapp myapp
     tests.py
     views.py
 
-* __init__.py - Just to make sure python handles this folder as a package.
+* `__init__.py` - Just to make sure python handles this folder as a package.
 
 * `admin.py` - This file helps you make the app modifiable in the admin interface.
 
@@ -67,16 +67,37 @@ values from the regular expression as other arguments. If the regex uses simple
 captures, values are passed as positional arguments; if it uses named captures, 
 values are passed as key word arguments.
 
+## settings.py
+
+In `settings.py`, find the line that contains `TIME_ZONE` and modify
+it to choose your own timezone.
+
+```python
+TIME_ZONE = 'Asia/Kolkata'
+```
 
 ## setting up a database
+
+* we need to change the default sqlite3 database to mysql
+* go to `settings.py` and under DATABASES list
+
+```python
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'todolist',
+        'USER': 'root',
+        'PASSWORD': '******', # you need to put the PASSWORD you have
+                              # given to the mysql server
+        'HOST': '',
+        'PORT': ''
+```
 
 * In order to login to mysql
     `sudo mysql -u root -p`
 
 
-## Differences between __str__ and __repr__
+## Differences between `__str__` and `__repr__`
 
-* __str__ is more readable than __repr__ which gives the python object
+* `__str__` is more readable than `__repr__` which gives the python object
   usually eval will convert it back to that object.
 * __repr__ is a printable representation of the object. 
   This method calls `repr` builtin function.
@@ -93,6 +114,7 @@ object.save()
 
 * hard coding the values to the data base
 * don't do this.
+
 ```python
 todo1 = Todo(
   website = "www.polo.com",
@@ -104,7 +126,6 @@ todo1.save()
 # if we want to delete an entry
 todo_delete = Todo.objects.get(name = "sorez")
 todo_delete.delete()
-
 #Filtering data
 queries = Todo.objects.filter(name="paul")
 # Ordering results
@@ -112,6 +133,8 @@ results = Todo.objects.order_by("name")
 ```
 
 ### models.ForeignKey
+
+* It is a link to another model
 
 A many-to-one relationship. Requires two positional arguments: The class
 to which the model is related and the on_delete option.
@@ -142,12 +165,3 @@ It is not very smart -- it takes a list of patterns and tries to match
 the URL. Django checks patterns from top to bottom and if something is 
 matched, then Django passes the request to the associated function 
 (which is called *view*)
-
-## settings.py
-
-In `settings.py`, find the line that contains `TIME_ZONE` and modify
-it to choose your own timezone.
-
-```python
-TIME_ZONE = 'Asia/Kolkata'
-```
