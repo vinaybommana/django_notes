@@ -52,14 +52,14 @@ python3 manage.py startapp myapp
 * The `url()` function is passed four arguments, two required: `regex` and `view`
   and two optional : `kwargs` and `name`.
 
-####`url()` argument : regex
+###`url()` argument : regex
 
 * Note that these regular expressions do not search GET and POST parameters, or the
   domain name.
   https://www.example.com/myapp/ the URLconf will look for myapp/
   https://www.example.com/myapp/?page=3 the URLconf will also look for myapp/
 
-####`url()` argument : view
+###`url()` argument : view
 
 When Django finds a regular expression match, Django calls the specified view 
 function, with an HttpRequest object as the first argument and any "captured"
@@ -176,7 +176,7 @@ information from the `model` we've created before and pass it to a `template`.
 
 ### Django ORM and Query Sets
 
-#### QuerySet
+### QuerySet
 
 A QuerySet is, in essence, a list of objects of a given Model
 QuerySet allow you to read the data from the database, filter it and order it.
@@ -192,7 +192,7 @@ The effect should be like:
 <QuerySet []>
 ```
 
-#### Creating an Object
+### Creating an Object
 
 ```python3
 >>> Post.objects.create(author=me, title='Sample title', text='Test')
